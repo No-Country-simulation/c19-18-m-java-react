@@ -1,0 +1,68 @@
+{
+  "companies": [
+    {
+      "id": "b70659e4-eda4-4e72-a8fb-6a32a358ce6d",
+      "name": "sol gas",
+      "address": "street 123 abc",
+      "phone": "987654321",
+      "ruc": "0123456789",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 1
+    },
+
+    {
+      "id": "2d2f76a4-fec4-4ed3-9629-e6a396df458f",
+      "name": "llama gas",
+      "address": "456 Oak St, Anytown USA",
+      "phone": "555-1234",
+      "ruc": "9876543210",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 2
+    },
+    {
+      "id": "89eefc8b-2ae4-4fa6-a574-887f7d5d5e58",
+      "name": "rapi gas",
+      "address": "789 Maple Ave, Somewhere City",
+      "phone": "555-5678",
+      "ruc": "0987654321",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 3
+    },
+    {
+      "id": "6b2be326-4c43-40c7-add4-a174949d2649",
+      "name": "zeta gas",
+      "address": "321 Pine Rd, Anywhere Town",
+      "phone": "555-9012",
+      "ruc": "1234567890",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 4
+    },
+    {
+      "id": "d0dfd3dc-680c-48e0-94bc-5a14c0274573",
+      "name": "Rendi gas",
+      "address": "159 Elm St, Someplace Village",
+      "phone": "555-3456",
+      "ruc": "9012345678",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 5
+    },
+    {
+      "id": "2c504a5b-1416-4d30-bed2-f5e00e55da1b",
+      "name": "Dura gas",
+      "address": "753 Oak Rd, Anyplace City",
+      "phone": "555-7890",
+      "ruc": "8765432109",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 6
+    },
+    {
+      "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+      "name": "Mi gas",
+      "address": "951 Maple St, Somewhere Town",
+      "phone": "555-2109",
+      "ruc": "6543210987",
+      "image": "https://via.placeholder.com/150",
+      "id_user": 7
+    }
+  ]
+}

@@ -1,12 +1,30 @@
-export default function Footer() {
-  // return <footer className="h-[200px] bg-gray-500">&#169; 2024 Mas Gas</footer>;
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import for icons
+
+const Footer = () => {
   return (
-    <footer className="h-[200px] bg-gray-500 flex flex-row justify-between p-4">
-      <p className="w-1/3 bg-blue-500">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et vitae
-        laboriosam, beatae repellendus cumque fugit.
-      </p> 
-      <p>&#169; 2024 Mas Gas</p>
+    <footer className="bg-blue-700 text-white text-center py-4 flex justify-between">
+      <p className="px-4 mb-4 w-[16rem]">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat ullam
+        cupiditate voluptates mollitia eaque aut assumenda accusamus. Suscipit,
+        voluptatibus iste?
+      </p>
+      <div className="flex justify-center space-x-4 px-4">
+        social media icons
+        <FontAwesomeIcon
+          icon="fa-facebook"
+          className="text-2xl hover:text-blue-600"
+        />
+        <FontAwesomeIcon
+          icon="fa-twitter"
+          className="text-2xl hover:text-blue-600"
+        />
+        <FontAwesomeIcon
+          icon="fa-instagram"
+          className="text-2xl hover:text-blue-600"
+        />
+      </div>
     </footer>
   );
-}
+};
+
+export default Footer;
