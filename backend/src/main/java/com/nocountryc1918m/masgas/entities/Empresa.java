@@ -1,5 +1,6 @@
 package com.nocountryc1918m.masgas.entities;
 
+import com.nocountryc1918m.masgas.auth.entities.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
