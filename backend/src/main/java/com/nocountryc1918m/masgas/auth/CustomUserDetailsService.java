@@ -1,5 +1,6 @@
 package com.nocountryc1918m.masgas.auth;
 
+import com.nocountryc1918m.masgas.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

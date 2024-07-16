@@ -1,4 +1,4 @@
-package com.nocountryc1918m.masgas.auth;
+package com.nocountryc1918m.masgas.repositories;
 
 import com.nocountryc1918m.masgas.auth.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
