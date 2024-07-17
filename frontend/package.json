@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "npx json-server --watch db.json --port 8080",
+    "server": "npx json-server --watch db.json --port 9080",
     "app": "concurrently \"npm run server\" \"npm run dev\""
   },
   "dependencies": {

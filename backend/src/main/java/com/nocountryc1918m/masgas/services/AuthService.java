@@ -95,6 +95,11 @@ public class AuthService{
         return (Usuario) securityContext.getAuthentication().getPrincipal(); // retorna el usuario que envia el jwt
     }
 
+    public UsuarioReadDto deleteUser(Integer id){
+        Usuario usuario = getUsuarioById(id);
+        userRepository.deleteById(id);
+        return userMapper.toReadDto(userRepository.save(usuario));
+    }
     public UsuarioReadDto editUser(HttpHeaders headers, Integer id, UsuarioReadDto dto){
         Usuario usuario = getUsuarioById(id); // verificar que existe por id user
         Boolean isAdmin = getLoguedUser(headers).getRole().equals(Role.ADMIN);
@@ -106,6 +111,7 @@ public class AuthService{
             if(dto.getNombre() != null) usuario.setNombre(dto.getNombre());
             if(dto.getApellido() != null) usuario.setApellido(dto.getApellido());
             if(dto.getTelefono() != null) usuario.setTelefono(dto.getTelefono());
+
         }
         usuario.setModificado(LocalDateTime.now());
         return userMapper.toReadDto(userRepository.save(usuario));

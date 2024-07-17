@@ -53,5 +53,11 @@ public class AuthController {
     public ResponseEntity<UsuarioReadDto> editUser (@RequestHeader HttpHeaders headers, @PathVariable Integer id, @RequestBody UsuarioReadDto dto){
         return new ResponseEntity<>(authService.editUser(headers, id, dto), HttpStatus.OK);
     }
+    @DeleteMapping("user/{id}")
+    @PreAuthorize("#id == authentication.principal.id")
+    public ResponseEntity<UsuarioReadDto> deleteUser (@RequestHeader HttpHeaders headers, @PathVariable Integer id, @RequestBody UsuarioReadDto dto){
+        return new ResponseEntity<>(authService.deleteUser(id), HttpStatus.OK);
+    }
+
 
 }
