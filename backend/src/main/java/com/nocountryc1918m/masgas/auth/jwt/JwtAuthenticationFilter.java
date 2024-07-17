@@ -2,6 +2,7 @@ package com.nocountryc1918m.masgas.auth.jwt;
 
 
 import com.nocountryc1918m.masgas.auth.CustomUserDetailsService;
+import com.nocountryc1918m.masgas.exceptions.types.ForbiddenException;
 import com.nocountryc1918m.masgas.repositories.UserRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -66,12 +67,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // throw new ForbiddenException(e.getMessage());
             // todo VERIFICAR MANEJO DE ERROR!!
             // todo => token expìradooooo verificar manejoooo
+            throw new ForbiddenException(e.getMessage());
             // todo => token expìradooooo verificar manejoooo
             // todo => token expìradooooo verificar manejoooo
             // todo VERIFICAR MANEJO DE ERROR!!
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
-            return;
+            // response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            // ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
+            // return;
         }
     }
 }

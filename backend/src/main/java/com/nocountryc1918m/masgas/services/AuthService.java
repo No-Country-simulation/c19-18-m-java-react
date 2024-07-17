@@ -2,6 +2,9 @@ package com.nocountryc1918m.masgas.services;
 
 import com.nocountryc1918m.masgas.dtos.UsuarioPagedList;
 import com.nocountryc1918m.masgas.dtos.UsuarioReadDto;
+import com.nocountryc1918m.masgas.exceptions.types.BadCredentialsException;
+import com.nocountryc1918m.masgas.exceptions.types.InvalidInputException;
+import com.nocountryc1918m.masgas.exceptions.types.NotFoundException;
 import com.nocountryc1918m.masgas.mappers.UserMapper;
 import com.nocountryc1918m.masgas.repositories.UserRepository;
 import com.nocountryc1918m.masgas.auth.entities.*;
@@ -51,7 +54,7 @@ public class AuthService{
         // todo hacer validadores de negocio!!!
 
         if (! registerRequest.getPassword1().equals(registerRequest.getPassword2())) {
-            throw new RuntimeException("Passwords no coinciden!"); // todo InvalidValueException("Passwords no coinciden!");
+            throw new InvalidInputException("Passwords no coinciden!");
         }
 
         Usuario user = new Usuario().builder()
@@ -76,12 +79,16 @@ public class AuthService{
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail() , loginRequest.getPassword()));
-        UserDetails userDetails = getUsuarioByEmail(loginRequest.getEmail());
-        String token = jwtService.generateToken(userDetails);
-        return AuthResponse.builder()
-                .token(token)
-                .build();
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail() , loginRequest.getPassword()));
+            UserDetails userDetails = getUsuarioByEmail(loginRequest.getEmail());
+            String token = jwtService.generateToken(userDetails);
+            return AuthResponse.builder()
+                    .token(token)
+                    .build();
+        } catch (Exception e){
+            throw new BadCredentialsException("Login error: "+e.getMessage());
+        }
     }
     public Usuario getLoguedUser(HttpHeaders headers) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -107,11 +114,11 @@ public class AuthService{
         return userMapper.toReadDto(getUsuarioById(id));
     }
     public Usuario getUsuarioByEmail(String email){
-        return userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found")); // todo NotFoundException o parecido
+        return userRepository.findByEmail(email).orElseThrow(()-> new NotFoundException("User not found"));
     }
 
     public Usuario getUsuarioById(Integer id){
-        return userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found")); // todo NotFoundException o parecido
+        return userRepository.findById(id).orElseThrow(()-> new NotFoundException("User not found"));
     }
     public UsuarioReadDto getByEmail(String email){
         return userMapper.toReadDto(getUsuarioByEmail(email));
