@@ -60,20 +60,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     securityContext.setAuthentication(token);
                     SecurityContextHolder.setContext(securityContext);
+                } else {
+                    throw new ForbiddenException("Token inválido o expirado");
                 }
             }
             filterChain.doFilter(request, response);
+
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e){
-            // throw new ForbiddenException(e.getMessage());
             // todo VERIFICAR MANEJO DE ERROR!!
-            // todo => token expìradooooo verificar manejoooo
+            // todo => NO FUNCIONA EL MANEJO DE EXCEP, NO SE PROPAGA HASTA EL MANEJADOR GLOBAL
             throw new ForbiddenException(e.getMessage());
-            // todo => token expìradooooo verificar manejoooo
-            // todo => token expìradooooo verificar manejoooo
-            // todo VERIFICAR MANEJO DE ERROR!!
-            // response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            // ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
-            // return;
+            // todo => NO FUNCIONA EL MANEJO DE EXCEP, NO SE PROPAGA HASTA EL MANEJADOR GLOBAL
         }
     }
 }

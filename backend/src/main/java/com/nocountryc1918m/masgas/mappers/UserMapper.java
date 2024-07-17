@@ -25,7 +25,7 @@ public class UserMapper {
                 .apellido(u.getApellido())
                 .telefono(u.getTelefono())
                 .email(u.getEmail())
-                .role(u.getRole())
+                .role(u.getRole().name())
                 .activo(u.isActivo())
                 .creado(u.getCreado())
                 .modificado(u.getModificado())

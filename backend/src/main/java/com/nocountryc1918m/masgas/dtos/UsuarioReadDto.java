@@ -17,8 +17,8 @@ public class UsuarioReadDto {
     String apellido;
     String telefono;
     String email;
-    Role role;
-    boolean activo;
+    String role;
+    Boolean activo;
     LocalDateTime creado;
     LocalDateTime modificado;
 }

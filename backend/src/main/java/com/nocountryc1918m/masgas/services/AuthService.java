@@ -99,14 +99,15 @@ public class AuthService{
         Usuario usuario = getUsuarioById(id); // verificar que existe por id user
         Boolean isAdmin = getLoguedUser(headers).getRole().equals(Role.ADMIN);
 
-        if(isAdmin){
-            usuario.setRole(dto.getRole()); // todo admin solo puede modificar rol del usuario
-        } else{
-            // no debe ser viable cambiar email, depende de como lo haga debo evitar ese comportamiento!
-            // todo si llego al endpoint, y no es admin,es porque es el usuario
-            // todo hacer comprobaciones para saber que viene y como actualizar el usuario.. mirar en donatello, la forma que usan los chicos para actualizar los registros es mas facil, y evito tantisimos if! Lo hacen con mapStruc => productMapper.updateProduct(product, productDto);
-
+        if(isAdmin){ // admin solo puede modificar rol y estado del usuario
+            if(dto.getRole() != null) usuario.setRole(Role.valueOf(dto.getRole()));
+            if(dto.getActivo() != null) usuario.setActivo(dto.getActivo());
+        } else{ // si llego al endpoint, y no es admin,es porque es el usuario y solo puede cambiar sus datos personales
+            if(dto.getNombre() != null) usuario.setNombre(dto.getNombre());
+            if(dto.getApellido() != null) usuario.setApellido(dto.getApellido());
+            if(dto.getTelefono() != null) usuario.setTelefono(dto.getTelefono());
         }
+        usuario.setModificado(LocalDateTime.now());
         return userMapper.toReadDto(userRepository.save(usuario));
     }
 

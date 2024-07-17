@@ -3,6 +3,7 @@ package com.nocountryc1918m.masgas.exceptions;
 import com.nocountryc1918m.masgas.exceptions.types.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,7 @@ public class GlobalExceptionHandler {
         return new ErrorMessage(exception, request.getRequestURI());
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler({BadCredentialsException.class})
     @ResponseBody
     public ErrorMessage badCredentials(HttpServletRequest request, Exception exception) {
@@ -26,7 +27,7 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler({ForbiddenException.class})
+    @ExceptionHandler({ForbiddenException.class, AuthorizationDeniedException.class})
     @ResponseBody
     public ErrorMessage forbiddenRequest(HttpServletRequest request, Exception exception) {
         return new ErrorMessage(exception, request.getRequestURI());
@@ -37,7 +38,7 @@ public class GlobalExceptionHandler {
     public ErrorMessage conflict(HttpServletRequest request, Exception exception) {
         return new ErrorMessage(exception, request.getRequestURI());
     }
-    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({InvalidInputException.class})
     @ResponseBody
     public ErrorMessage invalidInput(HttpServletRequest request, Exception exception) {
