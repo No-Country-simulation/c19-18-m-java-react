@@ -9,6 +9,7 @@ import com.nocountryc1918m.masgas.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,11 @@ public class AuthController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsuarioReadDto> getById (@PathVariable Integer id){
         return new ResponseEntity<>(authService.getById(id), HttpStatus.OK);
+    }
+    @PutMapping("user/{id}")
+    @PreAuthorize("hasRole('ADMIN') OR #id == authentication.principal.id")
+    public ResponseEntity<UsuarioReadDto> editUser (@RequestHeader HttpHeaders headers, @PathVariable Integer id, @RequestBody UsuarioReadDto dto){
+        return new ResponseEntity<>(authService.editUser(headers, id, dto), HttpStatus.OK);
     }
 
 }

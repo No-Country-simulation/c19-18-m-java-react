@@ -11,8 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -80,20 +83,35 @@ public class AuthService{
                 .token(token)
                 .build();
     }
+    public Usuario getLoguedUser(HttpHeaders headers) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        return (Usuario) securityContext.getAuthentication().getPrincipal(); // retorna el usuario que envia el jwt
+    }
+
+    public UsuarioReadDto editUser(HttpHeaders headers, Integer id, UsuarioReadDto dto){
+        Usuario usuario = getUsuarioById(id); // verificar que existe por id user
+        Boolean isAdmin = getLoguedUser(headers).getRole().equals(Role.ADMIN);
+
+        if(isAdmin){
+            usuario.setRole(dto.getRole()); // todo admin solo puede modificar rol del usuario
+        } else{
+            // no debe ser viable cambiar email, depende de como lo haga debo evitar ese comportamiento!
+            // todo si llego al endpoint, y no es admin,es porque es el usuario
+            // todo hacer comprobaciones para saber que viene y como actualizar el usuario.. mirar en donatello, la forma que usan los chicos para actualizar los registros es mas facil, y evito tantisimos if! Lo hacen con mapStruc => productMapper.updateProduct(product, productDto);
+
+        }
+        return userMapper.toReadDto(userRepository.save(usuario));
+    }
+
     public UsuarioReadDto getById(Integer id){
         return userMapper.toReadDto(getUsuarioById(id));
     }
-
     public Usuario getUsuarioByEmail(String email){
-        Optional<Usuario> u = userRepository.findByEmail(email);
-        if (u.isEmpty()) throw new RuntimeException("User not found"); // todo NotFoundException o parecido
-        return u.get();
+        return userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found")); // todo NotFoundException o parecido
     }
 
     public Usuario getUsuarioById(Integer id){
-        Optional<Usuario> u = userRepository.findById(id);
-        if (u.isEmpty()) throw new RuntimeException("User not found"); // todo NotFoundException o parecido
-        return u.get();
+        return userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found")); // todo NotFoundException o parecido
     }
     public UsuarioReadDto getByEmail(String email){
         return userMapper.toReadDto(getUsuarioByEmail(email));
