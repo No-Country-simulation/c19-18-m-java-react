@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserReadDto {
+public class UsuarioReadDto {
     int id;
     String nombre;
     String apellido;

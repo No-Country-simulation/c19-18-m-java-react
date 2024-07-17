@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PagedUserList {
+public class UsuarioPagedList {
     private List users;
     private Long total_results;
     private Integer results_per_page;

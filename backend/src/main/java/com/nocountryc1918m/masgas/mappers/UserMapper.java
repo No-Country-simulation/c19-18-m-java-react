@@ -1,7 +1,7 @@
 package com.nocountryc1918m.masgas.mappers;
 
 import com.nocountryc1918m.masgas.auth.entities.Usuario;
-import com.nocountryc1918m.masgas.dtos.UserReadDto;
+import com.nocountryc1918m.masgas.dtos.UsuarioReadDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,8 +18,8 @@ public class UserMapper {
     LocalDateTime creado;
     LocalDateTime modificado;
      */
-    public UserReadDto toReadDto(Usuario u){
-        return UserReadDto.builder()
+    public UsuarioReadDto toReadDto(Usuario u){
+        return UsuarioReadDto.builder()
                 .id(u.getId())
                 .nombre(u.getNombre())
                 .apellido(u.getApellido())
