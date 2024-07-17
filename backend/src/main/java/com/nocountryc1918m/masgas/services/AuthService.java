@@ -1,9 +1,15 @@
 package com.nocountryc1918m.masgas.services;
 
+import com.nocountryc1918m.masgas.dtos.PagedUserList;
+import com.nocountryc1918m.masgas.mappers.UserMapper;
 import com.nocountryc1918m.masgas.repositories.UserRepository;
 import com.nocountryc1918m.masgas.auth.entities.*;
 import com.nocountryc1918m.masgas.auth.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +23,8 @@ public class AuthService{
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserMapper userMapper;
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -70,6 +78,34 @@ public class AuthService{
         String token = jwtService.generateToken(userDetails);
         return AuthResponse.builder()
                 .token(token)
+                .build();
+    }
+    public PagedUserList getAll(String role, Integer page, Integer size, String sortBy) {
+        Page<Usuario> results;
+        Sort sort = Sort.by(sortBy);
+        Pageable pageable = PageRequest.of(page,size,sort);
+        Role searchRole;
+
+        try{
+            searchRole = Role.valueOf(role);
+        } catch (Exception e){
+            searchRole = null;
+        }
+
+        if (searchRole != null) {
+            results = userRepository.findByRole(searchRole, pageable);
+        } else {
+            results = userRepository.findAll(pageable);
+        }
+        Page pagedResults = results.map(entity -> userMapper.toReadDto(entity));
+
+        return PagedUserList.builder()
+                .users(pagedResults.getContent())
+                .total_results(pagedResults.getTotalElements())
+                .results_per_page(size)
+                .current_page(page)
+                .pages(pagedResults.getTotalPages())
+                .sort_by(sortBy)
                 .build();
     }
 

@@ -55,13 +55,13 @@ public class Usuario implements UserDetails {
     Role role;
 
     @ColumnDefault("true")
-    private boolean activo;
+    boolean activo;
 
     @CreationTimestamp
-    private LocalDateTime creado;
+    LocalDateTime creado;
 
     @UpdateTimestamp
-    private LocalDateTime modificado;
+    LocalDateTime modificado;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
