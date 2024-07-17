@@ -74,24 +74,31 @@ public class AuthService{
 
     public AuthResponse login(LoginRequest loginRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail() , loginRequest.getPassword()));
-        UserDetails userDetails = userRepository
-                .findByEmail(loginRequest.getEmail())
-                .orElseThrow(()->new RuntimeException(("User not found"))); // todo NotFoundException o parecido
+        UserDetails userDetails = getUsuarioByEmail(loginRequest.getEmail());
         String token = jwtService.generateToken(userDetails);
         return AuthResponse.builder()
                 .token(token)
                 .build();
     }
-
     public UsuarioReadDto getById(Integer id){
         return userMapper.toReadDto(getUsuarioById(id));
     }
+
+    public Usuario getUsuarioByEmail(String email){
+        Optional<Usuario> u = userRepository.findByEmail(email);
+        if (u.isEmpty()) throw new RuntimeException("User not found"); // todo NotFoundException o parecido
+        return u.get();
+    }
+
     public Usuario getUsuarioById(Integer id){
         Optional<Usuario> u = userRepository.findById(id);
         if (u.isEmpty()) throw new RuntimeException("User not found"); // todo NotFoundException o parecido
         return u.get();
     }
-    public UsuarioPagedList getAll(String role, Integer page, Integer size, String sortBy) {
+    public UsuarioReadDto getByEmail(String email){
+        return userMapper.toReadDto(getUsuarioByEmail(email));
+    }
+    public UsuarioPagedList getAll(String role, String email, Integer page, Integer size, String sortBy) {
         Page<Usuario> results;
         Sort sort = Sort.by(sortBy);
         Pageable pageable = PageRequest.of(page,size,sort);
@@ -105,7 +112,9 @@ public class AuthService{
 
         if (searchRole != null) {
             results = userRepository.findByRole(searchRole, pageable);
-        } else {
+        } else if(email!= null){
+            results = userRepository.findByEmailContains(email, pageable);
+        }else {
             results = userRepository.findAll(pageable);
         }
         Page pagedResults = results.map(entity -> userMapper.toReadDto(entity));

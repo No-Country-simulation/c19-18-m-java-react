@@ -36,16 +36,16 @@ public class AuthController {
     @GetMapping("user/")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsuarioPagedList> getAll (@RequestParam(required = false) String role,
+                                                    @RequestParam(required = false) String email,
                                                     @RequestParam(required = false, defaultValue = "0") Integer page,
                                                     @RequestParam(required = false, defaultValue = "10") Integer size,
                                                     @RequestParam(required = false, defaultValue = "role") String sortBy){
-        return new ResponseEntity<>(authService.getAll(role, page, size, sortBy), HttpStatus.OK);
+        return new ResponseEntity<>(authService.getAll(role,email, page, size, sortBy), HttpStatus.OK);
     }
     @GetMapping("user/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsuarioReadDto> getById (@PathVariable Integer id){
         return new ResponseEntity<>(authService.getById(id), HttpStatus.OK);
     }
-
 
 }
