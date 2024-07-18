@@ -18,9 +18,12 @@ public class Empresa {
     @Column(name = "empresa_id")
     private int id;
 
+    @Column(name = "nombre", unique = true)
     private String nombre;
     private String direccion;
     private String telefono;
+
+    @Column(name = "identificadorFiscal", unique = true)
     private String identificadorFiscal;
     private String logotipo;
 
