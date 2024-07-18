@@ -31,4 +31,8 @@ public class ProductoMapper {
     }
 
 
+    public List<ProductoDto> toDtoList(List<Producto> productos) {
+        if(productos == null) return null;
+        return productos.stream().map(this::toDto).toList();
+    }
 }

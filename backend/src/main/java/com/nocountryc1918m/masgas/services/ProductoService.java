@@ -41,4 +41,16 @@ public class ProductoService {
 
     }
 
+    public List<ProductoDto> getAll() {
+        return productoMapper.toDtoList(productoRepository.findAll());
+    }
+
+    public List<ProductoDto> getByTipoGas(String tipoGas) {
+        return productoMapper.toDtoList(productoRepository.getByTipoGas(tipoGas));
+    }
+
+
+    public List<ProductoDto> getByVolume(int volume) {
+        return productoMapper.toDtoList(productoRepository.getByVolume(volume));
+    }
 }

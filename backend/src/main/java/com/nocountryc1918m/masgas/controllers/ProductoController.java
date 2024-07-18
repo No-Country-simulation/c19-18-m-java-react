@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "products/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -22,7 +25,9 @@ public class ProductoController {
     @Autowired
     ProductoService productoService;
 
+
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductoDto> createOrUpdate(@Valid @RequestBody ProductoDto productoDto) {
 
 
@@ -31,6 +36,7 @@ public class ProductoController {
 
 
     @GetMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<?> getById(@Valid @PathVariable int id) {
 
         try {
@@ -44,6 +50,7 @@ public class ProductoController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@Valid @PathVariable int id) {
         try {
             productoService.delete(id);
@@ -52,4 +59,23 @@ public class ProductoController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    public ResponseEntity<List<ProductoDto>> getAll() {
+        return new ResponseEntity<>(productoService.getAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("typeGas")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    public ResponseEntity<List<ProductoDto>> getByTipoGas(@RequestBody String tipoGas) {
+        return new ResponseEntity<>(productoService.getByTipoGas(tipoGas), HttpStatus.OK);
+    }
+
+    @GetMapping("volume/{volume}")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    public ResponseEntity<List<ProductoDto>> getByVolume(@PathVariable int volume) {
+        return new ResponseEntity<>(productoService.getByVolume(volume), HttpStatus.OK);
+    }
+
 }
