@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --bg-color: red;
+    --second-bg-color: white;
+    --text-color: black;
+    --main-color: #0ef;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+body{
+    background-color: var(--second-bg-color);
+    color: var(--text-color);
+}
+section{
+    padding:0rem 0% 0rem;
+}
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 7%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.header.sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.opciones {
+    background-color: red;
+}
+.logo{
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 400;
+    cursor: default;
+}
+.opciones{
+    width: 100%;
+    padding: 7rem 7%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.navbar a{
+    font-size: 1.7rem;
+    color: white;
+    margin-left: 4rem;
+    transition: .3s;
+}
+.navbar a:hover,
+.navbar a.active{
+    color: white;
+}
+#menu-icon{
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+.banner5 {
+    width: 100%;
+    top: 0;
+    left: 0;
+
+}
+.container1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left;
+}
+.card1 {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 520px;
+    margin: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card1 img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-content1 {
+    padding: 45px;
+}
+
+.card-content1 h3 {
+    margin: 0 3 10px;
+    font-size: 18px;
+}
+
+.card-content1 .rating {
+    font-weight: bold;
+    color: #000;
+}
+
+
+.card-content1 p {
+    margin: 5px 3;
+    color: #000;
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    margin: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.card-content p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.card-content .rating {
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+
+
+
+.logo1 {
+    padding: 10px 0;
+    background-color: #0462A3;
+    width: 100%;
+}
+
+.logo1 img {
+    width: 13%;
+    float: center;
+
+}
+footer {
+    background-color: #f0f0f0;
+    margin-top: 20px;
+}
+
+.footer-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-links-section {
+    background-color: #fff;
+    padding: 20px 0;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.footer-section {
+    margin-bottom: 20px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.link-column {
+    margin: 10px 0;
+}
+
+.link-column h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.link-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.link-column li {
+    margin-bottom: 5px;
+}
+
+.link-column a {
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s;
+}
+
+.link-column a:hover {
+    color: #007bff;
+}
+
+.footer-copyright-section {
+    background-color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #777;
+}
+
+@media (max-width: 768px) {
+    .links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .link-column {
+        width: 100%;
+        text-align: center;
+    }
+}
