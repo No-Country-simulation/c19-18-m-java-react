@@ -15,7 +15,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedOrigins("*"); // todo revisar puerto front!
+                        .allowedOrigins("http://localhost:5173"); // todo revisar puerto front!
             }
         };
     }
