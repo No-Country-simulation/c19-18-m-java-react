@@ -27,7 +27,7 @@ body{
     color: var(--text-color);
 }
 section{
-    padding:0rem 0% 0rem;
+    padding:3rem 0% 0rem;
 }
 .header{
     position: fixed;
@@ -45,7 +45,6 @@ section{
 .header.sticky {
     border-bottom: .1rem solid rgba(0, 0, 0, .2);
 }
-
 .opciones {
     background-color: red;
 }
@@ -79,94 +78,105 @@ section{
     color: var(--text-color);
     display: none;
 }
-.banner2 {
-    width: 100%;
-    top: 0;
-    left: 0;
 
+.registration-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.store-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-radius: 5px;
-    width: 85%;
-    margin: 20px auto;
-}
-
-.store-count {
+.registration-form input {
+    width: 50%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 16px;
-    font-weight: bold;
 }
-.filter-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
+
+.registration-form button {
+    width: 50%;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: red;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
-    background-color: #f5f5f5;
     transition: background-color 0.3s;
 }
 
-.filter-button:hover {
-    background-color: #ddd;
+.registration-form button:hover {
+    background-color: darkred;
 }
 
-.filter-icon {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    background: url('image/filtroicono.PNG') no-repeat center center;
-    background-size: contain;
-    margin-left: 5px;
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px;
-    margin: 10px;
-    text-decoration: none;
-    color: inherit;
-}
-
-.card img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.card-content {
-    padding: 15px;
-}
-
-.card-content h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
-}
-
-.card-content p {
-    margin: 5px 0;
+.alternative-text {
+    margin: 20px 0 10px;
     color: #555;
 }
 
-.card-content .rating {
-    font-weight: bold;
-    color: #333;
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
+
+.social-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.social-button.facebook {
+    background-color: #3b5998;
+}
+
+.social-button.google {
+    background-color: #db4437;
+}
+
+.social-button.apple {
+    background-color: #000;
+}
+
+.login-link {
+    margin: 20px 0;
+}
+
+.login-link a {
+    color: red;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.terms {
+    font-size: 12px;
+    color: #999;
+}
+
+.terms a {
+    color: red;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
+
 
 .logo1 {
     padding: 10px 0;
